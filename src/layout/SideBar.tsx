@@ -1,13 +1,12 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { 
-   
+import {
  
   Users, 
   
   Activity,
  
-  X
+//   X
 } from 'lucide-react';
 
 // NOTE: UserRole type is removed as auth logic is commented out
@@ -71,25 +70,25 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
 
       {/* Sidebar - **Purple Background Applied** */}
       <div className={`
-        fixed inset-y-0 left-0 z-50 w-60 h-screen bg-[#8A2266] shadow-2xl transition-transform duration-300 ease-in-out
+        fixed inset-y-0 left-0 z-50 w-54 h-screen bg-[#8A2266] shadow-2xl transition-transform duration-300 ease-in-out
         lg:translate-x-0 lg:static lg:inset-0
         ${isOpen ? 'translate-x-0' : '-translate-x-full'}
       `}>
-        <div className="flex items-center justify-between p-6 border-b ">
+        <div className="flex items-center gap-6 p-6  ">
           <div className="flex items-center ">
             {/* Logo area */}
-            <div className="w-24 h-16 rounded-lg flex items-center justify-center">
-              <img src="/src/assets/Wema.png" alt="Wema Logo" className="w-6 h-6" />
+            <div className="w-16 h-20 rounded-lg flex items-center justify-center ">
+              <img src="/src/assets/Wema_white.png" alt="Wema Logo" className="w-28 h-14 mb-8 ml-16 " />
             </div>
             {/* Text color changed to white */}
-            <span className="text-lg font-semibold text-white">SDE</span>
+            {/* <div className="text-2xl font-semibold text-white mb-8 ">SDE</div> */}
           </div>
           
           
           <button onClick={onClose} 
          className="lg:hidden p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100"
           >
-         <X className="w-5 h-5" />
+         {/* <X className="w-5 h-5" /> */}
           </button> 
 
         </div>
@@ -105,8 +104,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                   // Text color changed for visibility and active background updated
                   `flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors duration-200 ${
                     isActive
-                      ? 'bg-indigo-600 text-white shadow-md' // Active state: darker purple background
-                      : 'text-gray-100 hover:bg-indigo-600 hover:text-white' // Inactive state: light text, hover darkens
+                      ? 'bg-[#8A2266] text-white shadow-md' // Active state: darker purple background
+                      : 'text-gray-100 hover:bg-[#bd3799] hover:text-white' // Inactive state: light text, hover darkens
                   }`
                 }
               >
@@ -118,7 +117,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
         </nav>
 
         {/* User info at bottom */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 border-t ">
+        <div className="absolute bottom-0 left-0 right-0 p-4  ">
           <div className="flex items-center space-x-3">
             {/* Avatar color remains a purple gradient, text is white */}
             <div className="w-8 h-8 gradient-primary rounded-full flex items-center justify-center text-white text-sm font-medium">

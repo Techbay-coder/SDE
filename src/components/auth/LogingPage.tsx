@@ -1,11 +1,53 @@
 
-import React, { useState } from "react";
+import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
+import type loginValues from "../../types";
+import toast from "react-hot-toast";
 
 
-export default function LoginPage() {
+const Crediential = {
+ email: "azeez@gmail.com",
+ password: "azeez123",
+};
+ const validationSchema = Yup.object({
+  email: Yup.string()
+  .email("Invalid email address").required("Email is required"),
+  password: Yup.string()
+  .min(6, "Password must be at least 6 characters")
+  .required("Password is required"),
+});
+
+ const LoginPage: React.FC = () => {
+    // const [email, setEmail] = useState("");
+    // const [password, setPassword] = useState("");
+    const navigate = useNavigate();
+
+
+
+   const formik = useFormik<loginValues>({
+     initialValues: {
+       email: "",
+       password: "",
+    
+     },
+      validationSchema,
+     onSubmit: (values) => {
+       
+        // setEmail('');
+        // const email = values.email; 
+        // setPassword('');
+  
+        if (values.email === Crediential.email && values.password === Crediential.password) {
+          //  setEmail(values.email);
+           toast.success("Login successful!");
+           navigate("/layout");
+          }
+         console.log(values);
+       },
+   });
+
   return (
     <div className="min-h-screen bg-white- flex items-center justify-center">
       {/* Card */}
@@ -50,11 +92,17 @@ export default function LoginPage() {
             </p>
           </div>
 
-          <form className="space-y-6">
+          <form onSubmit={ formik.handleSubmit} className="space-y-6">
             <div>
               <label className="text-sm">Email address</label>
               <input
+                id ="email"
+                name="email"
                 type="email"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.email}
+
                 className="mt-2 w-full rounded-full px-5 py-3 outline-none"
               />
             </div>
@@ -62,7 +110,12 @@ export default function LoginPage() {
             <div>
               <label className="text-sm">Password</label>
               <input
+                id="password"
                 type="password"
+                name="password"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.password}
                 className="mt-2 w-full rounded-full px-5 py-3 outline-none"
               />
             </div>
@@ -79,4 +132,5 @@ export default function LoginPage() {
       </div>
     </div>
   );
-}
+};
+export default LoginPage;

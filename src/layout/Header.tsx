@@ -9,23 +9,23 @@ interface HeaderProps {
 }
 
 // Hardcoded user placeholder data for static display
-// const DUMMY_USER = {
-//   fullName: "Azeez Adigun",
-//   email: "Azeez.Adigun@example.com",
-//   role: "owner",
-// };
+const user = {
+fullname: "Azeez Adigun",
+  email: "Azeez.Adigun@example.com",
+  role: "owner",
+};
 
 // Placeholder helper functions (since they were imported)
-const getInitials = (name: string) => {
-    if (!name) return "U";
-    const parts = name.split(' ');
-    return parts.map(p => p.charAt(0)).join('').toUpperCase().slice(0, 2);
-};
+// const getInitials = (name: string) => {
+//     if (!name) return "U";
+//     const parts = name.split(' ');
+//     return parts.map(p => p.charAt(0)).join('').toUpperCase().slice(0, 2);
+// };
 
-const getRoleDisplayName = (role: string) => {
-    if (!role) return "User";
-    return role.replace(/_/g, ' ');
-};
+// const getRoleDisplayName = (role: string) => {
+//     if (!role) return "User";
+//     return role.replace(/_/g, ' ');
+// };
 
 
 const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
@@ -36,7 +36,7 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
  // const user = DUMMY_USER;
 
   return (
-    <header className="bg-white shadow-sm border-b border-gray-200">
+    <header className="bg-white shadow-lg border-b border-gray-200">
       <div className="flex items-center justify-between px-6 py-4">
         <div className="flex items-center space-x-4">
           
@@ -49,7 +49,7 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
           </button>
 
           <div className="hidden lg:block">
-            <h1 className="text-xl font-semibold text-gray-900">
+            <h1 className="text-2xl font-extrabold text-gray-900">
               SDE
             </h1>
           </div>
