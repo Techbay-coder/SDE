@@ -4,36 +4,24 @@ import { Menu,  LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 // NOTE: HeaderProps interface and props destructing removed for static display
+
+  // const DUMMY_USER = {
+  //   fullName: "Azeez Adigun",
+  //   email: " azeez@gmail.com",
+  //   role: "Admin"
+  // };
+
+// const user = DUMMY_USER;
 interface HeaderProps {
   onMenuClick: () => void;
 }
-
-// Hardcoded user placeholder data for static display
-const user = {
-fullname: "Azeez Adigun",
-  email: "Azeez.Adigun@example.com",
-  role: "owner",
-};
-
-// Placeholder helper functions (since they were imported)
-// const getInitials = (name: string) => {
-//     if (!name) return "U";
-//     const parts = name.split(' ');
-//     return parts.map(p => p.charAt(0)).join('').toUpperCase().slice(0, 2);
-// };
-
-// const getRoleDisplayName = (role: string) => {
-//     if (!role) return "User";
-//     return role.replace(/_/g, ' ');
-// };
 
 
 const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
  
    const navigate = useNavigate();
-   const udStr = sessionStorage.getItem("ud");
-   const user = udStr ? JSON.parse(udStr) : null;
- // const user = DUMMY_USER;
+  //  const udStr = sessionStorage.getItem("ud");
+  //  const user = udStr ? JSON.parse(udStr) : null;
 
   return (
     <header className="bg-white shadow-lg border-b border-gray-200">
@@ -68,15 +56,15 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
             <button className="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100">
               {/* User Avatar */}
               <div className="w-8 h-8 gradient-primary rounded-full flex items-center justify-center text-white text-sm font-medium">
-                {user ? getInitials(user?.fullName) : "U"}
+                {/* {user ? getInitials(user?.fullName) : "U"} */}
               </div>
               {/* User Name & Role */}
               <div className="hidden md:block text-left">
                 <div className="text-sm font-medium text-gray-900">
-                  {user?.fullName} {/* Changed from user?.name to user?.fullName for consistency */}
+                  {/* {user?.fullName} Changed from user?.name to user?.fullName for consistency */}
                 </div>
                 <div className="text-xs text-gray-500">
-                  {user ? getRoleDisplayName(user?.role) : ""}
+                  {/* {user ? getRoleDisplayName(user?.role) : ""} */}
                 </div>
               </div>
             </button>
@@ -90,9 +78,9 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
                 {/* User Info in Dropdown */}
                 <div className="px-4 py-2 border-b border-gray-100">
                   <div className="text-sm font-medium text-gray-900">
-                    {user?.fullName}
+                    {/* {user?.fullName} */}
                   </div>
-                  <div className="text-xs text-gray-500">{user?.email}</div>
+                  {/* <div className="text-xs text-gray-500">{user?.email}</div> */}
                 </div>
 
                 {/* Profile Button (Commented out in original, keeping it commented) */}

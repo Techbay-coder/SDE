@@ -3,11 +3,12 @@ import { NavLink } from 'react-router-dom';
 import {
  
   Users, 
-  
   Activity,
  
-//   X
+  X
 } from 'lucide-react';
+// import  { UserRole } from '../types';
+//import  { UserRole } from '../src/types';
 
 // NOTE: UserRole type is removed as auth logic is commented out
 // type UserRole = 'RM' | 'TRADE_TEAM' | 'TREASURY' | 'SGC' | 'AUDITOR';
@@ -26,14 +27,14 @@ interface NavItem {
   // roles: UserRole[]; // Removed roles for static display
 }
 
-// NOTE: Using the original nav items, roles removed.
+// NOTE: Using the original nav items, roles removed
 const navItems: NavItem[] = [
 //   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
 //   { name: 'New Request', href: '/request/new', icon: Plus },
 //   { name: 'My Requests', href: '/requests', icon: FileText },
 //   { name: 'Trade Review', href: '/trade-review', icon: CheckSquare },
 //   { name: 'Treasury Review', href: '/treasury-review', icon: DollarSign },
-  { name: 'User Management', href: '/users', icon: Users },
+  { name: 'User Management', href: '/user-management', icon: Users, },
   { name: 'Audit Logs', href: '/audit-logs', icon: Activity },
 ];
 
@@ -44,6 +45,7 @@ const navItems: NavItem[] = [
 
 // The component is now a static display component without props.
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
+
   
   // Hardcoded placeholder user data for display
 //   const user = {
@@ -68,9 +70,9 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
         />
       )}
 
-      {/* Sidebar - **Purple Background Applied** */}
+      {/* Sidebar */}
       <div className={`
-        fixed inset-y-0 left-0 z-50 w-54 h-screen bg-[#8A2266] shadow-2xl transition-transform duration-300 ease-in-out
+        fixed inset-y-0 left-0 z-50 w-50  h-screen bg-[#8A2266] shadow-2xl transition-transform duration-300 ease-in-out
         lg:translate-x-0 lg:static lg:inset-0
         ${isOpen ? 'translate-x-0' : '-translate-x-full'}
       `}>

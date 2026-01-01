@@ -30,6 +30,7 @@ const Crediential = {
      initialValues: {
        email: "",
        password: "",
+       otp: "",
     
      },
       validationSchema,
@@ -103,7 +104,7 @@ const Crediential = {
                 onBlur={formik.handleBlur}
                 value={formik.values.email}
 
-                className="mt-2 w-full rounded-full px-5 py-3 outline-none"
+                className="mt-2 w-full rounded-xl px-5 py-3 outline-none"
               />
             </div>
 
@@ -116,13 +117,13 @@ const Crediential = {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.password}
-                className="mt-2 w-full rounded-full px-5 py-3 outline-none"
+                className="mt-2 w-full rounded-xl px-5 py-3 outline-none hover:border-[#79146b]"
               />
             </div>
 
             <button
               type="submit"
-              className="w-40 mx-auto block bg-[#8A226F] text-white py-3 rounded-full  hover:bg-[#bd3799] shadow-2xl transition"
+              className="w-40 mx-auto block bg-[#8A226F] text-white py-3 rounded-2xl  hover:bg-[#bd3799] shadow-2xl transition"
             >
               sign in
             </button>

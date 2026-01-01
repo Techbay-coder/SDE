@@ -10,28 +10,29 @@ export default interface paginationProps {
     itemsPerPage: number;
     
 };
-export interface User {
+export  interface User {
   id: string;
   email: string;
   name: string;
   fullName?: string;
-  //role: UserRole;
-  //roleType?: UserRole;
+  role: UserRole;
+  roleType?: UserRole;
   isActive: boolean;
   createdAt: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   createdOn?: string | any;
-  dateLastUpdated?: string 
+  dateLastUpdated?: string ;
+  updatedBy?:string;
 
 };
-interface DocumentUpload {
+export interface DocumentUpload {
   id: string;
   fileName: string;
   fileType: string;
   uploadDate: string;
   url: string;
 };
-export interface AuditLog {
+export  interface AuditLog {
     id: string;
     userId: string;
     userName: string;
@@ -45,3 +46,43 @@ export interface AuditLog {
     requestURL?: string;
     statusCode?: number;
 }
+
+export type UserRole = 'OFFICER' | "ADMIN" | 'AUDITOR';
+ 
+export const validateEmail = (email: string): boolean => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
+export interface PaginationInfo {
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+}
+
+export interface ApiResponse<T> {
+  success: boolean;
+  data: T;
+  message?: string;
+  pagination?: PaginationInfo;
+}
+
+export interface LoginCredentials {
+  email: string;
+  password: string;
+  otp: string;
+  
+}
+
+export interface AuthState {
+  user: User | null;
+  token: string | null;
+  isAuthenticated: boolean;
+  isLoading: boolean;
+}
+// export const getFileSize = (bytes: number): string => {
+//   const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+//   if (bytes === 0) return '0 Bytes';
+//   const i = Math.floor(Math.log(bytes) / Math.log(1024));
+//   return Math.round(bytes / Math.pow(1024, i) * 100) / 100 + ' ' + sizes[i];
+// };
