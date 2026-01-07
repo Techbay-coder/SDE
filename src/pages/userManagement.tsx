@@ -1,89 +1,28 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Plus,
   Search,
   Download,
+  Edit,
   UserCheck,
   UserX,
-  Edit,
 } from "lucide-react";
 import Table from "../components/essentials/table";
-import type { User, UserRole } from "../types";
-import toast from "react-hot-toast";
-import { formatDate, getRoleDisplayName, searchItems } from "../utils/helpers";
-
-import UserForm from "../components/users/userForm";
-import ConfirmDialog from "../components/essentials/confirmDiaolog";
 import Modal from "../components/essentials/Modal";
+//import ConfirmDialog from "../components/essentials/confirmDialog";
+import UserForm from "../components/users/userForm";
+import type { User, UserRole } from "../types";
 import { exportUsers } from "../utils/export";
-
-
-  const mockUsers: User[] = [
-  {id: "1",
-  email: "adeboye@gmail.com",
-  name: "adeboye",
-  fullName: "adeboye alli ",
-  role: "ADMIN",
-  // roleType?: "ADMIN",
-  isActive: true,
-  createdAt: new Date().toISOString(),
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  createdOn: "2023-10-01T10:00:00Z",
-    dateLastUpdated: "2023-10-10T12:00:00Z",   
-
-  },
-  {id: "2",
-  email: "adebinpe@gmail.com",
-  name: "adebinpe",
-  fullName: "adebinpe alli ",
-  role: "ADMIN",
-  // roleType?: "ADMIN",
-  isActive: true,
-  createdAt: new Date().toISOString(),
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  createdOn: "2023-10-01T10:00:00Z",
-    dateLastUpdated: "2023-10-10T12:00:00Z",   
-
-  },
-
-  {id: "3",
-  email: "adebinpe@gmail.com",
-  name: "adebinpe",
-  fullName: "adebinpe alli ",
-  role: "ADMIN",
-   roleType: "ADMIN",
-  isActive: true,
-  createdAt: new Date().toISOString(),
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  createdOn: "2023-10-01T10:00:00Z",
-    dateLastUpdated: "2023-10-10T12:00:00Z",   
-
-  },
-];
-
-//   import React, { useState, useEffect } from "react";
-// import {
-//   Plus,
-//   Search,
-//   Download,
-//   Edit,
-//   UserCheck,
-//   UserX,
-// } from "lucide-react";
-//import Table from "../components/common/Table";
-//import Modal from "../components/essential/modal";
-//import ConfirmDialog from "../components/common/ConfirmDialog";
-//import UserForm from "../components/users/UserForm";
-//import { exportUsers } from "../utils/export";
-//import { formatDate, getRoleDisplayName, searchItems } from "../utils/helpers";
+import { formatDate, getRoleDisplayName, searchItems } from "../utils/helpers";
 //import { createUsers, getUsers, updateUsers } from "../services";
-//import toast from "react-hot-toast";
+import toast from "react-hot-toast";
+import ConfirmDialog from "../components/essentials/confirmDialog";
 
 const UserManagement: React.FC = () => {
   const udStr = sessionStorage.getItem("ud");
   const user = udStr ? JSON.parse(udStr) : null;
   const [users, setUsers] = useState<User[]>([]);
- // const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
+  const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -108,23 +47,20 @@ const UserManagement: React.FC = () => {
 
   const fetchUsers = () => {
     setLoading(true);
-    setUsers(mockUsers);
-    setLoading(false);
-    // getUsers().then((res) => {
-    //   setLoading(false);
-    //   setUsers(res);
-    // });
+    getUsers().then((res) => {
+      setLoading(false);
+      setUsers(res);
+    });
   };
 
 
 
   useEffect(() => {
-    //fetchUsers();
-    //fetchUsers();
+   // fetchUsers();
   }, []);
-    //console.log(users,"USERS")
+    console.log(users,"USERS")
   // Filter and search users
-    const filteredUsers = useMemo (()=>{
+  useEffect(() => {
     let filtered = [...users];
 
     // Apply role filter
@@ -160,9 +96,9 @@ const UserManagement: React.FC = () => {
       }
     });
 
-    // setFilteredUsers(filtered);
-    // setCurrentPage(1);
-    return filtered
+    setFilteredUsers(filtered);
+    setCurrentPage(1);
+    
   }, [users, searchTerm, roleFilter, statusFilter, sortConfig]);
 
   const handleSort = (key: string, direction: "asc" | "desc") => {
@@ -195,7 +131,7 @@ const UserManagement: React.FC = () => {
         roleType: userToToggle.roleType,
         updatedBy: user.email,
       };
-      await updateUsers().then((res) => {
+      await updateUsers(payload).then((res) => {
         if(res.success) {
           setIsModalOpen(false);
           setIsLoading(false);
@@ -372,9 +308,9 @@ const UserManagement: React.FC = () => {
        <button
           onClick={handleAddUser}
 
-          className="btn-primary flex items-center space-x-2 w-auto px-2 text-[#f9f8f8] rounded-md bg-[#8A226F] hover:bg-[#741e53]"
+          className="btn-primary flex items-center space-x-2 bg-[#8A2266] w-auto px-2 text-white rounded-md"
         >
-         <Plus className="w-4 h-4 " />
+          <Plus className="w-5 h-5" />
           <span>Add User</span>
           </button> 
           {/* </button> } */}
@@ -414,9 +350,9 @@ const UserManagement: React.FC = () => {
               <option value="RM">Relationship Manager</option>
               <option value="TRADE_TEAM">Trade Team</option>
               <option value="TREASURY">Treasury</option> */}
+              <option value="OFFICER">officer</option>
               <option value="ADMIN"> Admin</option>
               <option value="AUDITOR">Auditor</option>
-              <option value="officer"> Officer</option>
             </select>
           </div>
 
@@ -441,10 +377,10 @@ const UserManagement: React.FC = () => {
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Export
             </label>
-            <div className="flex space-x-6 bg-[#8A226F ]">
+            <div className="flex space-x-2">
               <button
                 onClick={() => handleExport("excel")}
-              className="btn-secondary flex items-center space-x-1 text-sm  rounded-md bg-[#8A226F] text-white w-auto px-2"
+                className="btn-secondary flex items-center space-x-1 text-sm rounded-md bg-[#8A226F] text-white w-auto px-2"
               >
                 <Download className="w-4 h-4" />
                 <span>Excel</span>
@@ -479,7 +415,7 @@ const UserManagement: React.FC = () => {
       />
 
       {/* User Form Modal */}
-      { <Modal
+      <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         title={editingUser ? "Edit User" : "Add New User"}
@@ -491,10 +427,10 @@ const UserManagement: React.FC = () => {
           onCancel={() => setIsModalOpen(false)}
           isLoading={isLoading}
         />
-      </Modal> }
+      </Modal>
 
       {/* Confirmation Dialog */}
-      { <ConfirmDialog
+      <ConfirmDialog
         isOpen={isConfirmDialogOpen}
         onClose={() => setIsConfirmDialogOpen(false)}
         onConfirm={confirmToggleStatus}
@@ -508,7 +444,7 @@ const UserManagement: React.FC = () => {
         } the system.`}
         type={userToToggle?.isActive ? "warning" : "success"}
         confirmText={userToToggle?.isActive ? "Deactivate" : "Activate"}
-      /> }
+      />
     </div>
   );
 };

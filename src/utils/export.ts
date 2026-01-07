@@ -105,7 +105,7 @@ export const exportAuditLogs = (logs: AuditLog[], format: 'excel' | 'pdf') => {
     id: log.id,
     userName: log.userName,
     actionType: log.actionType,
-    requestUrl: log.requestUrl,
+    requestUrl: log.requestURL,
     statusCode: log.statusCode,
     ipAddress: log.ipAddress,
     timestamp: new Date(log.timestamp).toLocaleString(),

@@ -1,6 +1,14 @@
-export default interface loginValues {
+//import { LoginCredentials } from './index';
+
+// export default interface loginValues {
+//     email: string;
+//     password: string;
+//     //otp:stng
+// };
+export interface LoginCredentials {
     email: string;
     password: string;
+    //otp: string;
 };
  
 export default interface paginationProps {
@@ -68,7 +76,7 @@ export interface ApiResponse<T> {
 }
 
 export interface LoginCredentials {
-  email: string;
+  emailAddress: string;
   password: string;
   otp: string;
   
@@ -80,6 +88,11 @@ export interface AuthState {
   isAuthenticated: boolean;
   isLoading: boolean;
 }
+
+
+
+
+  
 // export const getFileSize = (bytes: number): string => {
 //   const sizes = ['Bytes', 'KB', 'MB', 'GB'];
 //   if (bytes === 0) return '0 Bytes';

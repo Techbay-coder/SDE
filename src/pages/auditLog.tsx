@@ -4,7 +4,7 @@ import Table from '../components/essentials/table';
 import type { AuditLog } from '../types';
 import { exportAuditLogs } from '../utils/export';
 import { formatDateTime, searchItems } from '../utils/helpers';
-import { getUserActivities } from '../services';
+//import { getUserActivities } from '../services';
 
 const AuditLogs: React.FC = () => {
   const [logs, setLogs] = useState<AuditLog[]>([]);
@@ -185,14 +185,14 @@ const AuditLogs: React.FC = () => {
             <div className="flex space-x-2">
               <button
                 onClick={() => handleExport('excel')}
-                className="btn-secondary flex items-center space-x-1 text-sm"
+                className="btn-secondary flex items-center space-x-1 text-sm rounded-md bg-[#8A226F] text-white w-auto px-2"
               >
                 <Download className="w-4 h-4" />
                 <span>Excel</span>
               </button>
               <button
                 onClick={() => handleExport('pdf')}
-                className="btn-secondary flex items-center space-x-1 text-sm"
+                className="btn-secondary flex items-center space-x-1 text-sm rounded-md bg-[#8A226F] text-white w-auto px-2"
               >
                 <Download className="w-4 h-4" />
                 <span>PDF</span>
@@ -226,3 +226,4 @@ const AuditLogs: React.FC = () => {
 };
 
 export default AuditLogs;
+   

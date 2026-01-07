@@ -1,3 +1,5 @@
+import api from "./interceptors"
+
 // import axios from 'axios';
 
 // const api = axios.create({
@@ -6,11 +8,15 @@
 // });
 
 
-// interface loginProps {
-//  email:string;
-//  password:string;
+interface loginProps {
+ emailAddress:string;
+ password:string;
 
-// }
+}
+interface otpProps {
+  emailAddress: string;
+  otp: string;
+}
 
 // interface createUserProps{
 // fullName: string;
@@ -28,11 +34,24 @@
 // updatedBy?: string;
 // }
 
-// export const login = async (data: loginProps) => {
-//   const response = await api.post('/auth/login', data);
-//   return response.data;
-// };
+export const login = async (data: loginProps) => {
+  // eslint-disable-next-line no-useless-catch
+  try {
+  const response = await api.post(`https://10.21.21.246/EChannelsStructuredDbService/api/Authentication/login`, data);
+  return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 
+export const otp = async (data: otpProps) => {
+  try {
+    const response = await api.post(`/Admin/verify-token`, data);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
 // export const createUser = async (data: createUserProps) => {
 //   const response = await api.post('/users', data);
 //   return response.data;
